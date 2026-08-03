@@ -82,8 +82,9 @@ export function HeroContent() {
         {/* Minimalist 3-Column White Card Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-left">
           {solutions.map((name) => (
-            <div
+            <a
               key={name}
+              href={`/contact?service=${encodeURIComponent(name)}`}
               className="flex items-center justify-between px-6 py-4 rounded-2xl bg-white text-[#0B0F19] hover:bg-slate-50 transition-colors duration-300 shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-white/90 group cursor-pointer"
             >
               {/* Bold Black Title */}
@@ -95,7 +96,7 @@ export function HeroContent() {
               <div className="w-9 h-9 rounded-full bg-[#0B0F19] text-white flex items-center justify-center shrink-0 shadow-md group-hover:bg-black transition-colors duration-300 ml-3">
                 <ArrowUpRight className="w-4 h-4 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </motion.div>

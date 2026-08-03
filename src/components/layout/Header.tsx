@@ -29,12 +29,12 @@ export function Header() {
   const navItems = ["About", "Services", "AI Solutions", "Contact"];
 
   const serviceItems = [
-    { name: "Web Development", href: "/#web-development" },
-    { name: "UI/UX Design", href: "/#ui-ux-design" },
-    { name: "AI Solutions", href: "/#ai-solutions" },
-    { name: "Mobile Applications", href: "/#mobile-apps" },
-    { name: "Brand Identity", href: "/#brand-identity" },
-    { name: "SEO & Growth", href: "/#seo-growth" },
+    { name: "Web Development", href: "/contact?service=Web+Development" },
+    { name: "UI/UX Design", href: "/contact?service=UI%2FUX+Design" },
+    { name: "AI Solutions", href: "/contact?service=AI+Solutions" },
+    { name: "Mobile Applications", href: "/contact?service=Mobile+Applications" },
+    { name: "Brand Identity", href: "/contact?service=Brand+Identity" },
+    { name: "SEO & Growth", href: "/contact?service=SEO+%26+Growth" },
   ];
 
   const getHref = (item: string) => {

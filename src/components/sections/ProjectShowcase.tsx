@@ -25,7 +25,13 @@ const projects = [
 
 export function ProjectShowcase() {
   return (
-    <section id="view-work" className="relative z-20 w-full pt-4 sm:pt-6 pb-16 sm:pb-20 overflow-hidden px-6">
+    <section id="view-work" className="relative z-20 w-full pt-12 sm:pt-20 pb-16 sm:pb-20 overflow-hidden px-6">
+      {/* Seamless dark gradient transition from Hero section video into pure solid black (no straight dividing lines!) */}
+      <div className="absolute inset-0 pointer-events-none -z-10 flex flex-col">
+        <div className="h-32 sm:h-44 w-full bg-gradient-to-b from-transparent via-black/75 to-black shrink-0" />
+        <div className="flex-1 w-full bg-black" />
+      </div>
+
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         
         {/* Editorial Subheading Divider */}

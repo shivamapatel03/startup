@@ -34,7 +34,7 @@ export function Footer({ transparent = false, noBorder = false, compact = false 
   return (
     <footer
       className={`relative z-20 w-full text-slate-400 font-outfit transition-colors duration-300 ${
-        transparent ? "bg-transparent" : "bg-[#05070F]"
+        transparent ? "bg-transparent" : "bg-black"
       } ${noBorder ? "border-none" : "border-t border-white/[0.08]"} ${
         compact ? "py-4 px-6 md:px-12" : "py-8 px-6 sm:px-12"
       }`}
