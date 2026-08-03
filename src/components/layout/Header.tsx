@@ -13,6 +13,8 @@ export function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [aiOpen, setAiOpen] = useState(false);
   const [mobileAiOpen, setMobileAiOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,6 +71,46 @@ export function Header() {
         {/* Center: Minimalist Desktop Navigation Links with Services Dropdown */}
         <nav className="hidden lg:flex items-center gap-9 text-[15px] font-normal text-slate-200/80">
           {navItems.map((item) => {
+            if (item === "About") {
+              return (
+                <div
+                  key={item}
+                  className="relative group"
+                  onMouseEnter={() => setAboutOpen(true)}
+                  onMouseLeave={() => setAboutOpen(false)}
+                >
+                  <button
+                    onClick={() => setAboutOpen(!aboutOpen)}
+                    className="flex items-center gap-1.5 hover:text-white py-2 focus:outline-none"
+                  >
+                    <span>{item}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 ${aboutOpen ? "rotate-180 text-white" : "text-slate-400"}`} />
+                  </button>
+
+                  {/* Simple White Card with Black Text - No Glass Effect, No Shadow, No Animation */}
+                  {aboutOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-[320px] bg-white text-black p-5 border border-neutral-300 rounded z-50 text-left">
+                      <h4 className="font-bold text-black font-outfit text-[17px] mb-2">
+                        Why BE UNIC?
+                      </h4>
+                      <p className="text-[13.5px] text-neutral-800 leading-normal mb-4 font-normal">
+                        We are a creative digital and engineering agency built for high-growth brands, merging state-of-the-art AI design with flawless technical execution.
+                      </p>
+                      <a
+                        href="https://www.linkedin.com/company/beunic-agency/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setAboutOpen(false)}
+                        className="inline-block w-full text-center bg-black hover:bg-neutral-900 text-white font-semibold py-2 px-4 rounded text-[13.5px]"
+                      >
+                        Explore Our Story
+                      </a>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             if (item === "Services") {
               return (
                 <div
@@ -193,6 +235,44 @@ export function Header() {
           >
             <nav className="flex flex-col px-8 pt-6 pb-9 gap-5 text-[22px] font-semibold text-white">
               {navItems.map((item) => {
+                if (item === "About") {
+                  return (
+                    <div key={item} className="border-b border-white/[0.08] pb-4 last:border-0 last:pb-0">
+                      <button
+                        onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                        className="w-full flex items-center justify-between hover:text-[#38BDF8] transition-colors text-[22px] font-semibold font-outfit text-left focus:outline-none"
+                      >
+                        <span>{item}</span>
+                        <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileAboutOpen ? "rotate-180 text-[#38BDF8]" : "text-slate-400"}`} />
+                      </button>
+
+                      {/* Simple Solid White Card for Mobile About - No Animation, No Shadow */}
+                      {mobileAboutOpen && (
+                        <div className="mt-3 bg-white text-black p-5 border border-neutral-300 rounded text-left">
+                          <h4 className="font-bold text-black font-outfit text-[17px] mb-2">
+                            Why BE UNIC?
+                          </h4>
+                          <p className="text-[14px] text-neutral-800 leading-relaxed mb-4 font-normal">
+                            We are a creative digital and engineering agency built for high-growth brands, merging state-of-the-art AI design with flawless technical execution.
+                          </p>
+                          <a
+                            href="https://www.linkedin.com/company/beunic-agency/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => {
+                              setMobileAboutOpen(false);
+                              setMobileMenuOpen(false);
+                            }}
+                            className="block w-full text-center bg-black hover:bg-neutral-900 text-white font-semibold py-2.5 px-4 rounded text-[15px]"
+                          >
+                            Explore Our Story
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 if (item === "Services") {
                   return (
                     <div key={item} className="border-b border-white/[0.08] pb-4 last:border-0 last:pb-0">

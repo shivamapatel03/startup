@@ -61,7 +61,7 @@ export function Footer({ transparent = false, noBorder = false, compact = false 
           </motion.a>
 
           <motion.a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/company/beunic-agency/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="BE UNIC LinkedIn"

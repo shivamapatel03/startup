@@ -9,6 +9,8 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -17,9 +19,38 @@ export default function ContactPage() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    // Active Formspree endpoint for BE UNIC agency project inquiries
+    const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_URL || "https://formspree.io/f/xwvggqpj";
+
+    try {
+      const res = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data,
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        const result = await res.json();
+        setError(result?.error || "There was a problem submitting your form. Please try again.");
+      }
+    } catch (err) {
+      setError("Unable to connect. Please check your internet connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -94,6 +125,9 @@ export default function ContactPage() {
 
               {/* Compact Form Controls */}
               <form onSubmit={handleSubmit} className="flex flex-col gap-3 text-left font-outfit">
+                {/* Formspree Email Subject Tag */}
+                <input type="hidden" name="_subject" value="New Project Inquiry - BE UNIC Website" />
+
                 <div>
                   <label htmlFor="name" className="block text-[11px] font-bold text-[#0B0F19] mb-1 uppercase tracking-wider">
                     Your Name
@@ -101,9 +135,11 @@ export default function ContactPage() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
+                    disabled={submitting}
                     placeholder="e.g. Alex Rivera"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none transition-all duration-200"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none transition-all duration-200 disabled:opacity-50"
                   />
                 </div>
 
@@ -114,9 +150,11 @@ export default function ContactPage() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
+                    disabled={submitting}
                     placeholder="alex@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none transition-all duration-200"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none transition-all duration-200 disabled:opacity-50"
                   />
                 </div>
 
@@ -126,23 +164,32 @@ export default function ContactPage() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={2}
                     required
+                    disabled={submitting}
                     placeholder="Key milestones or design goals..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none resize-none transition-all duration-200"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/80 focus:bg-white border border-black/10 focus:border-[#0B0F19] text-[#0B0F19] text-[13px] font-medium placeholder:text-slate-400 outline-none resize-none transition-all duration-200 disabled:opacity-50"
                   ></textarea>
                 </div>
+
+                {error && (
+                  <div className="text-[12px] text-red-600 font-medium bg-red-50 p-2.5 rounded-lg border border-red-200">
+                    {error}
+                  </div>
+                )}
 
                 {/* Compact Black Action Submit Button with White Cross Arrow */}
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full mt-1 py-3 px-6 rounded-full bg-[#0B0F19] text-white hover:bg-black font-bold text-[14px] transition-all duration-300 shadow-[0_6px_20px_rgba(11,15,25,0.35)] flex items-center justify-center gap-2 group"
+                  disabled={submitting}
+                  whileHover={submitting ? {} : { scale: 1.02 }}
+                  whileTap={submitting ? {} : { scale: 0.98 }}
+                  className="w-full mt-1 py-3 px-6 rounded-full bg-[#0B0F19] text-white hover:bg-black font-bold text-[14px] transition-all duration-300 shadow-[0_6px_20px_rgba(11,15,25,0.35)] flex items-center justify-center gap-2 group disabled:opacity-75 disabled:cursor-not-allowed"
                 >
-                  <span>Submit Inquiry</span>
+                  <span>{submitting ? "Sending..." : "Submit Inquiry"}</span>
                   <div className="w-5 h-5 rounded-full bg-white/15 text-white flex items-center justify-center transition-transform duration-300 group-hover:bg-white/25">
-                    <ArrowUpRight className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    <ArrowUpRight className={`w-3.5 h-3.5 text-white transition-transform duration-300 ${submitting ? "animate-spin" : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"}`} />
                   </div>
                 </motion.button>
               </form>
