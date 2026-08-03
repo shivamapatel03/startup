@@ -22,11 +22,11 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Spiral | Modern Digital & AI Agency",
+  title: "BE UNIC | Modern Digital & AI Agency",
   description:
     "We craft intuitive UI/UX, scalable applications, and modern digital solutions that accelerate brand growth.",
   openGraph: {
-    title: "Spiral | Modern Digital Agency",
+    title: "BE UNIC | Modern Digital Agency",
     description: "We craft intuitive UI/UX, scalable applications, and modern digital solutions that accelerate brand growth.",
     type: "website",
   },

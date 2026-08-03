@@ -43,7 +43,7 @@ export function Footer({ transparent = false, noBorder = false, compact = false 
         
         {/* Left Side: Copyright Notice */}
         <div className="text-center sm:text-left text-[13px] sm:text-[14px] font-normal tracking-wide text-slate-400">
-          © 2026 @ spiral all rights reserved.
+          © 2026 @ BE UNIC all rights reserved.
         </div>
 
         {/* Right Side Corner: Social Media Icons (Instagram, LinkedIn) */}
@@ -52,7 +52,7 @@ export function Footer({ transparent = false, noBorder = false, compact = false 
             href="https://www.instagram.com/beunic.agency/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Spiral Instagram"
+            aria-label="BE UNIC Instagram"
             whileHover={{ scale: 1.1, y: -2 }}
             transition={{ duration: 0.2 }}
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white text-slate-300 hover:text-[#0B0F19] transition-all duration-300 flex items-center justify-center border border-white/15 shadow-sm"
@@ -64,7 +64,7 @@ export function Footer({ transparent = false, noBorder = false, compact = false 
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Spiral LinkedIn"
+            aria-label="BE UNIC LinkedIn"
             whileHover={{ scale: 1.1, y: -2 }}
             transition={{ duration: 0.2 }}
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white text-slate-300 hover:text-[#0B0F19] transition-all duration-300 flex items-center justify-center border border-white/15 shadow-sm"

@@ -1,14 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Boxes, Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
+import beUnicLogo from "../../logo/Frame 18 (2).png";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [mobileAiOpen, setMobileAiOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +24,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["About", "Services", "AI Solutions", "Process", "Contact"];
+  const navItems = ["About", "Services", "AI Solutions", "Contact"];
 
   const serviceItems = [
     { name: "Web Development", href: "/#web-development" },
@@ -53,13 +57,13 @@ export function Header() {
         }`}
       >
         {/* Left: Brand / Logo (Links to home) */}
-        <a href="/" className="flex items-center gap-2.5 cursor-pointer group">
-          <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:bg-white/20 transition-colors">
-            <Boxes className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight font-outfit text-white">
-            Spiral
-          </span>
+        <a href="/" className="flex items-center cursor-pointer group focus:outline-none">
+          <Image
+            src={beUnicLogo}
+            alt="BE UNIC Logo"
+            className="h-9 sm:h-[42px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            priority
+          />
         </a>
 
         {/* Center: Minimalist Desktop Navigation Links with Services Dropdown */}
@@ -81,32 +85,62 @@ export function Header() {
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${servicesOpen ? "rotate-180 text-white" : "text-slate-400"}`} />
                   </button>
 
-                  {/* Sleek Services Dropdown with Small Black Cards */}
-                  <AnimatePresence>
-                    {servicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                        transition={{ duration: 0.18, ease: "easeOut" }}
-                        className="absolute top-full left-0 -mt-1 w-[260px] bg-black/95 backdrop-blur-2xl border border-white/10 p-2.5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85)] z-50 flex flex-col gap-1.5"
+                  {/* Simple White Services Dropdown with Black Text - No Glass Effect, No Shadow, No Animation */}
+                  {servicesOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-[260px] bg-white text-black border border-neutral-300 rounded p-2 z-50 flex flex-col gap-1 text-left">
+                      {serviceItems.map((service) => (
+                        <a
+                          key={service.name}
+                          href={service.href}
+                          onClick={() => setServicesOpen(false)}
+                          className="flex items-center justify-between px-3.5 py-2.5 rounded bg-white hover:bg-neutral-100 text-black border border-transparent hover:border-neutral-200 transition-colors group/item"
+                        >
+                          <span className="text-[14px] font-semibold text-black font-outfit tracking-tight">
+                            {service.name}
+                          </span>
+                          <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover/item:text-black shrink-0 ml-2" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            if (item === "AI Solutions") {
+              return (
+                <div
+                  key={item}
+                  className="relative group"
+                  onMouseEnter={() => setAiOpen(true)}
+                  onMouseLeave={() => setAiOpen(false)}
+                >
+                  <button
+                    onClick={() => setAiOpen(!aiOpen)}
+                    className="flex items-center gap-1.5 hover:text-white py-2 focus:outline-none"
+                  >
+                    <span>{item}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 ${aiOpen ? "rotate-180 text-white" : "text-slate-400"}`} />
+                  </button>
+
+                  {/* Simple White Card with Black Text - No Glass Effect, No Shadow, No Animation */}
+                  {aiOpen && (
+                    <div className="absolute top-full -left-10 mt-1 w-[320px] bg-white text-black p-5 border border-neutral-300 rounded z-50 text-left">
+                      <h4 className="font-bold text-black font-outfit text-[16px] mb-2">
+                        Intelligent AI Systems
+                      </h4>
+                      <p className="text-[13.5px] text-neutral-800 leading-normal mb-4 font-normal">
+                        Empower your business with custom AI agents, automated workflows, and advanced enterprise AI integrations tailored to scale your brand.
+                      </p>
+                      <a
+                        href="/contact"
+                        onClick={() => setAiOpen(false)}
+                        className="inline-block w-full text-center bg-black hover:bg-neutral-900 text-white font-semibold py-2 px-4 rounded text-[13.5px]"
                       >
-                        {serviceItems.map((service) => (
-                          <a
-                            key={service.name}
-                            href={service.href}
-                            onClick={() => setServicesOpen(false)}
-                            className="flex items-center justify-between px-4 py-2.5 rounded-xl bg-black hover:bg-[#1C1F2D] border border-white/[0.08] hover:border-white/[0.22] text-white transition-all duration-200 group/item shadow-sm"
-                          >
-                            <span className="text-[14px] font-semibold text-white font-outfit tracking-tight">
-                              {service.name}
-                            </span>
-                            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover/item:text-white group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5 transition-all duration-200 shrink-0 ml-2" />
-                          </a>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                        Request AI Consultation
+                      </a>
+                    </div>
+                  )}
                 </div>
               );
             }
@@ -170,31 +204,60 @@ export function Header() {
                         <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${mobileServicesOpen ? "rotate-180 text-[#38BDF8]" : "text-slate-400"}`} />
                       </button>
 
-                      {/* Mobile Services Dropdown Cards */}
-                      <AnimatePresence>
-                        {mobileServicesOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden mt-3.5 flex flex-col gap-2.5"
+                      {/* Simple Solid White Card for Mobile Services - No Animation, No Shadow */}
+                      {mobileServicesOpen && (
+                        <div className="mt-3 bg-white text-black p-3 border border-neutral-300 rounded flex flex-col gap-1 text-left">
+                          {serviceItems.map((service) => (
+                            <a
+                              key={service.name}
+                              href={service.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-center justify-between px-3 py-2.5 rounded bg-white hover:bg-neutral-100 text-black border border-transparent hover:border-neutral-200 transition-colors"
+                            >
+                              <span className="text-[16px] font-semibold tracking-tight font-outfit text-black">
+                                {service.name}
+                              </span>
+                              <ArrowUpRight className="w-4 h-4 text-neutral-600 shrink-0" />
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                if (item === "AI Solutions") {
+                  return (
+                    <div key={item} className="border-b border-white/[0.08] pb-4 last:border-0 last:pb-0">
+                      <button
+                        onClick={() => setMobileAiOpen(!mobileAiOpen)}
+                        className="w-full flex items-center justify-between text-[22px] font-semibold font-outfit text-left focus:outline-none"
+                      >
+                        <span>{item}</span>
+                        <ChevronDown className={`w-5 h-5 ${mobileAiOpen ? "rotate-180 text-[#38BDF8]" : "text-slate-400"}`} />
+                      </button>
+
+                      {/* Simple Solid White Card for Mobile - No Animation, No Shadow, No Glass Effect */}
+                      {mobileAiOpen && (
+                        <div className="mt-3 bg-white text-black p-5 border border-neutral-300 rounded text-left">
+                          <h4 className="font-bold text-black font-outfit text-[17px] mb-2">
+                            Intelligent AI Systems
+                          </h4>
+                          <p className="text-[14px] text-neutral-800 leading-relaxed mb-4 font-normal">
+                            Empower your business with custom AI agents, automated workflows, and advanced enterprise AI integrations tailored to scale your brand.
+                          </p>
+                          <a
+                            href="/contact"
+                            onClick={() => {
+                              setMobileAiOpen(false);
+                              setMobileMenuOpen(false);
+                            }}
+                            className="block w-full text-center bg-black hover:bg-neutral-900 text-white font-semibold py-2.5 px-4 rounded text-[15px]"
                           >
-                            {serviceItems.map((service) => (
-                              <a
-                                key={service.name}
-                                href={service.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="flex items-center justify-between px-4 py-3 rounded-xl bg-black hover:bg-[#1C1F2D] border border-white/[0.1] text-white transition-colors duration-200 shadow-sm"
-                              >
-                                <span className="text-[16px] font-semibold tracking-tight font-outfit text-white">
-                                  {service.name}
-                                </span>
-                                <ArrowUpRight className="w-4 h-4 text-white shrink-0" />
-                              </a>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                            Request AI Consultation
+                          </a>
+                        </div>
+                      )}
                     </div>
                   );
                 }

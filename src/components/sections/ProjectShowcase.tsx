@@ -110,7 +110,7 @@ export function ProjectShowcase() {
 
                   {/* Retro Embossed Brand Label */}
                   <span className="text-[11px] font-mono tracking-widest text-[#79735E] uppercase font-black select-none">
-                    SPIRAL.SYS
+                    BE UNIC.SYS
                   </span>
 
                   {/* Classic Glowing Power LED */}
