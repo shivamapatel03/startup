@@ -22,13 +22,50 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com"),
   title: "BE UNIC | Modern Digital & AI Agency",
   description:
-    "We craft intuitive UI/UX, scalable applications, and modern digital solutions that accelerate brand growth.",
+    "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+  keywords: [
+    "Digital Agency",
+    "AI Solutions",
+    "Web Development",
+    "UI/UX Design",
+    "Mobile Applications",
+    "Brand Identity",
+    "SEO & Growth",
+    "Custom AI Agents",
+    "Enterprise AI Integrations",
+    "BE UNIC",
+  ],
+  authors: [{ name: "BE UNIC Agency", url: "https://beunicstudio.com" }],
+  creator: "BE UNIC Agency",
+  publisher: "BE UNIC Agency",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "BE UNIC | Modern Digital Agency",
-    description: "We craft intuitive UI/UX, scalable applications, and modern digital solutions that accelerate brand growth.",
+    title: "BE UNIC | Modern Digital & AI Agency",
+    description:
+      "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+    url: "https://beunicstudio.com",
+    siteName: "BE UNIC",
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BE UNIC | Modern Digital & AI Agency",
+    description:
+      "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
   },
 };
 
