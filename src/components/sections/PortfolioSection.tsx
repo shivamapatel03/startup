@@ -19,7 +19,7 @@ interface WorkProject {
   slides: SlideItem[];
 }
 
-const workProjects: WorkProject[] = [
+export const workProjects: WorkProject[] = [
   {
     id: "food-delivery",
     title: "Food Delivery App",
@@ -97,7 +97,7 @@ const workProjects: WorkProject[] = [
   },
 ];
 
-function ProjectSlideshow({ project }: { project: WorkProject }) {
+export function ProjectSlideshow({ project }: { project: WorkProject }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
@@ -253,7 +253,7 @@ export function PortfolioSection() {
             transition={{ duration: 0.5, delay: 0.15 }}
           >
             <a
-              href="#contact"
+              href="/our-work"
               className="group inline-flex items-center gap-2 px-4 py-2 rounded-none border border-[#252525] bg-transparent text-[#252525] hover:bg-[#252525] hover:text-white transition-all duration-200 text-[13px] font-medium cursor-pointer w-fit select-none"
             >
               <span>See more</span>

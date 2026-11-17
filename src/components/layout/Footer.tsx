@@ -73,7 +73,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/#our-work"
+                  href="/our-work"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Our Work
