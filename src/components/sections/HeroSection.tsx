@@ -39,9 +39,10 @@ export function HeroSection() {
           </span>
           <div className="flex items-center -space-x-1.5">
             {[
-              { name: "Shivam patel", img: "/team/team1.png" },
-              { name: "Swayam shah", img: "/team/team2.png" },
-              { name: "pramukh prajapati", img: "/team/team3.png" },
+              { name: "Shivam Patel", img: "/team/team1.png" },
+              { name: "Swayam Shah", img: "/team/team2.png" },
+              { name: "Om Patel", img: "/team/team4.png" },
+              { name: "Pramukh Prajapati", img: "/team/team3.png" },
             ].map((member) => (
               <div key={member.name} className="relative group/member">
                 <Image

@@ -43,7 +43,7 @@ const otherNavLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -192,128 +192,140 @@ export function Header() {
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-1 text-[#252525] hover:opacity-70 transition-opacity focus:outline-none bg-transparent border-none cursor-pointer"
-          aria-label="Toggle navigation menu"
+          onClick={() => setMobileMenuOpen(true)}
+          className="lg:hidden p-1.5 text-[#252525] hover:opacity-70 transition-opacity focus:outline-none bg-transparent border-none cursor-pointer"
+          aria-label="Open navigation menu"
         >
-          {mobileMenuOpen ? (
-            <X className="w-6 h-6 text-[#252525]" />
-          ) : (
-            <Menu className="w-6 h-6 text-[#252525]" />
-          )}
+          <Menu className="w-6 h-6 text-[#252525]" />
         </button>
       </header>
 
-      {/* Full-Screen Mobile Navigation Overlay - Simple White Background Blur */}
+      {/* Mobile Navigation Drawer: Slides in from the LEFT side with smooth close animation */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl flex flex-col justify-between px-8 py-10 lg:hidden overflow-y-auto"
-          >
-            {/* Header: Clean Close Button */}
-            <div className="flex items-center justify-end pt-2">
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 text-[#252525] hover:opacity-70 transition-opacity focus:outline-none cursor-pointer"
-                aria-label="Close menu"
-              >
-                <X className="w-6 h-6 text-[#252525]" />
-              </button>
-            </div>
+          <>
+            {/* Backdrop Overlay — Smooth fade in/out, tap outside to close */}
+            <motion.div
+              key="mobile-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs lg:hidden"
+            />
 
-            {/* Nav list - Clean simple links with mobile Services Accordion */}
-            <div className="flex flex-col gap-5 my-auto">
-              {/* Mobile Services Accordion */}
-              <div className="flex flex-col">
-                <button
-                  type="button"
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="flex items-center justify-between text-2xl font-medium tracking-tight text-[#252525] hover:text-black/60 transition-colors w-full text-left py-1"
-                >
-                  <span>Services</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-[#666666] transition-transform duration-200 ${
-                      mobileServicesOpen ? "rotate-180 text-black" : ""
-                    }`}
-                  />
-                </button>
+            {/* Slide-out Drawer Panel from Left */}
+            <motion.div
+              key="mobile-drawer"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 left-0 bottom-0 z-50 w-[84vw] max-w-[340px] bg-white h-full shadow-2xl flex flex-col justify-between p-6 sm:p-7 lg:hidden overflow-y-auto"
+            >
+              <div>
+                {/* Drawer Header: Logo on left, Simple Close button on right */}
+                <div className="flex items-center justify-between pb-5 border-b border-[#F0F0F0]">
+                  <BrandLogo showText={false} />
+                  <button
+                    type="button"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-1.5 -mr-1.5 text-[#555555] hover:text-black hover:bg-[#F4F4F6] rounded-full transition-colors focus:outline-none cursor-pointer"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-5 h-5 text-[#252525]" />
+                  </button>
+                </div>
 
-                <AnimatePresence>
-                  {mobileServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden pl-3 pt-2 flex flex-col gap-3.5 border-l-2 border-[#EAEAEA] ml-1 my-2"
+                {/* Nav Links Stack */}
+                <div className="flex flex-col gap-4 pt-6">
+                  {/* Services Accordion with 3D Character Avatars */}
+                  <div className="flex flex-col">
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="flex items-center justify-between text-[18px] font-semibold text-[#181818] hover:text-black transition-colors w-full text-left py-1"
                     >
-                      {servicesList.map((service) => (
-                        <a
-                          key={service.title}
-                          href={service.href}
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            setMobileServicesOpen(false);
-                          }}
-                          className="flex items-start gap-3 py-1 group"
+                      <span>Services</span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[#888888] transition-transform duration-200 ${
+                          mobileServicesOpen ? "rotate-180 text-black" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {mobileServicesOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden pl-2.5 pt-2 flex flex-col gap-3 border-l-2 border-[#EAEAEA] ml-1.5 my-2"
                         >
-                          <div
-                            className={`w-7 h-7 rounded-full overflow-hidden shrink-0 ${service.badgeBg} border ${service.borderColor} shadow-xs mt-0.5`}
-                          >
-                            <Image
-                              src={service.characterImg}
-                              alt={service.title}
-                              width={28}
-                              height={28}
-                              className="w-full h-full object-cover object-top"
-                            />
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-1 text-[15px] font-semibold text-[#181818]">
-                              <span>{service.title}</span>
-                              <ArrowRight className="w-3.5 h-3.5 text-[#888888]" />
-                            </div>
-                            <p className="text-[12px] text-[#777777] line-clamp-1 mt-0.5">
-                              {service.description}
-                            </p>
-                          </div>
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                          {servicesList.map((service) => (
+                            <a
+                              key={service.title}
+                              href={service.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-start gap-2.5 py-1 group"
+                            >
+                              <div
+                                className={`w-7 h-7 rounded-full overflow-hidden shrink-0 ${service.badgeBg} border ${service.borderColor} shadow-xs mt-0.5`}
+                              >
+                                <Image
+                                  src={service.characterImg}
+                                  alt={service.title}
+                                  width={28}
+                                  height={28}
+                                  className="w-full h-full object-cover object-top"
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-1 text-[13.5px] font-semibold text-[#181818]">
+                                  <span>{service.title}</span>
+                                  <ArrowRight className="w-3 h-3 text-[#888888]" />
+                                </div>
+                                <p className="text-[11px] text-[#777777] line-clamp-1 mt-0.5">
+                                  {service.description}
+                                </p>
+                              </div>
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Other Links */}
+                  {otherNavLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-[18px] font-semibold text-[#181818] hover:text-black transition-colors py-1"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
               </div>
 
-              {otherNavLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
+              {/* Drawer Bottom CTA */}
+              <div className="pt-6 border-t border-[#F0F0F0] mt-auto">
+                <PrimaryButton
+                  href="#contact"
+                  size="default"
+                  variant="dark"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-2xl font-medium tracking-tight text-[#252525] hover:text-black/60 transition-colors"
+                  className="w-full justify-between"
                 >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="pt-4">
-              <PrimaryButton
-                href="#contact"
-                size="default"
-                variant="dark"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full justify-between"
-              >
-                Let&apos;s Talk
-              </PrimaryButton>
-            </div>
-          </motion.div>
+                  Let&apos;s Talk
+                </PrimaryButton>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

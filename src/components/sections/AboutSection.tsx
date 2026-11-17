@@ -19,6 +19,12 @@ const teamMembers = [
     elevated: true,
   },
   {
+    name: "Om Patel",
+    image: "/team/team4.png",
+    role: "Creative Direction & Design",
+    elevated: true,
+  },
+  {
     name: "Pramukh Prajapati",
     image: "/team/team3.png",
     role: "Full-Stack & Systems",
@@ -51,34 +57,34 @@ export function AboutSection() {
           </p>
         </motion.div>
 
-        {/* 3 Team Avatars in Arched Formation (Matching Reference Image) */}
+        {/* 4 Team Avatars in Symmetrical Arched Formation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex items-end justify-center gap-6 sm:gap-12 md:gap-16 pt-6 pb-4"
+          className="flex items-end justify-center gap-3 sm:gap-7 md:gap-10 pt-6 pb-4"
         >
           {teamMembers.map((member) => (
             <div
               key={member.name}
               className={`flex flex-col items-center transition-transform duration-300 ${
-                member.elevated ? "-translate-y-5 sm:-translate-y-7" : "translate-y-0"
+                member.elevated ? "-translate-y-4 sm:-translate-y-6" : "translate-y-0"
               }`}
             >
               {/* Circular Avatar */}
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden select-none transition-transform duration-300 hover:scale-[1.05]">
+              <div className="relative w-16 h-16 sm:w-22 sm:h-22 md:w-26 md:h-26 rounded-full overflow-hidden select-none transition-transform duration-300 hover:scale-[1.05]">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
-                  sizes="(max-width: 640px) 80px, 112px"
+                  sizes="(max-width: 640px) 64px, 104px"
                   className="object-cover object-center select-none"
                 />
               </div>
 
               {/* Member Name */}
-              <span className="mt-3 text-[13px] sm:text-[14px] font-semibold text-[#111111] tracking-tight">
+              <span className="mt-2.5 sm:mt-3 text-[12px] sm:text-[13.5px] font-semibold text-[#111111] tracking-tight text-center">
                 {member.name}
               </span>
             </div>
