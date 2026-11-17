@@ -57,7 +57,7 @@ export function Footer() {
             <ul className="space-y-2 text-[14px] sm:text-[15px] font-medium text-[#252525]">
               <li>
                 <a
-                  href="#hero"
+                  href="/#hero"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Home
@@ -65,7 +65,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="/#services"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Services
@@ -73,7 +73,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#our-work"
+                  href="/#our-work"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Our Work
@@ -81,7 +81,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#about-us"
+                  href="/#about-us"
                   className="hover:text-black transition-colors duration-200"
                 >
                   About Us
@@ -89,7 +89,15 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#contact"
+                  href="/members"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  Members
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/#contact"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Contact
