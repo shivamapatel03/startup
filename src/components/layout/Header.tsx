@@ -1,43 +1,36 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
-import {
-  Menu,
-  X,
-  ChevronDown,
-  ArrowRight,
-  Palette,
-  Smartphone,
-  Globe,
-} from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const servicesList = [
   {
     title: "App Design",
-    description:
-      "Intuitive mobile UI/UX and interactive prototypes that make your product impossible to forget.",
+    description: "Intuitive mobile UI/UX and interactive prototypes.",
     href: "/#services",
-    icon: Palette,
-    badgeBg: "bg-[#7C3AED]",
+    characterImg: "/character/design.png",
+    badgeBg: "bg-[#F0E9FF]",
+    borderColor: "border-[#7C3AED]/20",
   },
   {
     title: "App Development",
-    description:
-      "Scalable native and cross-platform iOS & Android mobile applications built for performance.",
+    description: "Scalable iOS & Android apps built for performance.",
     href: "/#services",
-    icon: Smartphone,
-    badgeBg: "bg-[#2563EB]",
+    characterImg: "/character/appdev.png",
+    badgeBg: "bg-[#E4F1FF]",
+    borderColor: "border-[#2563EB]/20",
   },
   {
     title: "Web Development",
-    description:
-      "Fast, responsive, and modern websites that strengthen your brand and help your business grow.",
+    description: "Fast, responsive modern websites that help you grow.",
     href: "/#services",
-    icon: Globe,
-    badgeBg: "bg-[#E11D48]",
+    characterImg: "/character/webdev.png",
+    badgeBg: "bg-[#FFE8ED]",
+    borderColor: "border-[#E11D48]/20",
   },
 ];
 
@@ -103,7 +96,7 @@ export function Header() {
           <BrandLogo showText={false} />
         </div>
 
-        {/* Center Section — Stripe-style clean navigation with Services Mega Dropdown */}
+        {/* Center Section — Stripe-style clean navigation with Compact Services Dropdown */}
         <nav className="hidden lg:flex items-center gap-7 md:gap-9">
           {/* Services Dropdown Item */}
           <div
@@ -126,39 +119,45 @@ export function Header() {
               />
             </button>
 
-            {/* Dropdown Menu (Matches Figmafy style with 3 services) */}
+            {/* Compact Dropdown Menu with 3 Character Avatars */}
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                  initial={{ opacity: 0, y: 6, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                  transition={{ duration: 0.16, ease: "easeOut" }}
-                  className="absolute top-full -left-10 lg:-left-16 pt-3.5 z-50 w-[780px] lg:w-[820px] max-w-[calc(100vw-3rem)] pointer-events-auto"
+                  exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute top-full -left-16 sm:-left-20 lg:-left-24 pt-2.5 z-50 w-[520px] sm:w-[540px] max-w-[calc(100vw-2rem)] pointer-events-auto"
                 >
-                  <div className="bg-white rounded-2xl border border-[#EAEAEA] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-6 md:p-7">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white rounded-xl border border-[#EAEAEA] shadow-[0_12px_32px_rgba(0,0,0,0.08)] p-3 sm:p-3.5">
+                    <div className="grid grid-cols-3 gap-2.5">
                       {servicesList.map((service) => (
                         <a
                           key={service.title}
                           href={service.href}
                           onClick={() => setServicesOpen(false)}
-                          className="group flex items-start gap-3.5 p-3.5 -m-2 rounded-xl hover:bg-[#F9FAFB] transition-colors duration-200 text-left"
+                          className="group flex items-start gap-2.5 p-2 rounded-lg hover:bg-[#F8F9FA] transition-colors duration-200 text-left"
                         >
-                          {/* Circular Icon Badge */}
+                          {/* 3D Character Avatar Badge */}
                           <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${service.badgeBg} shadow-sm group-hover:scale-105 transition-transform duration-200 mt-0.5`}
+                            className={`w-8 h-8 rounded-full overflow-hidden shrink-0 ${service.badgeBg} border ${service.borderColor} shadow-xs group-hover:scale-105 transition-transform duration-200 mt-0.5`}
                           >
-                            <service.icon className="w-5 h-5 text-white" />
+                            <Image
+                              src={service.characterImg}
+                              alt={service.title}
+                              width={32}
+                              height={32}
+                              className="w-full h-full object-cover object-top"
+                            />
                           </div>
 
                           {/* Content */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-1.5 text-[15px] font-semibold text-[#181818] group-hover:text-black">
-                              <span>{service.title}</span>
-                              <ArrowRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-1 transition-all duration-200" />
+                            <div className="flex items-center gap-1 text-[12.5px] sm:text-[13px] font-semibold text-[#181818] group-hover:text-black">
+                              <span className="truncate">{service.title}</span>
+                              <ArrowRight className="w-3 h-3 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 transition-transform shrink-0" />
                             </div>
-                            <p className="mt-1.5 text-[13px] text-[#666666] leading-relaxed">
+                            <p className="mt-0.5 text-[11px] text-[#666666] leading-snug line-clamp-2">
                               {service.description}
                             </p>
                           </div>
@@ -264,9 +263,15 @@ export function Header() {
                           className="flex items-start gap-3 py-1 group"
                         >
                           <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${service.badgeBg} shadow-sm mt-0.5`}
+                            className={`w-7 h-7 rounded-full overflow-hidden shrink-0 ${service.badgeBg} border ${service.borderColor} shadow-xs mt-0.5`}
                           >
-                            <service.icon className="w-4 h-4 text-white" />
+                            <Image
+                              src={service.characterImg}
+                              alt={service.title}
+                              width={28}
+                              height={28}
+                              className="w-full h-full object-cover object-top"
+                            />
                           </div>
                           <div>
                             <div className="flex items-center gap-1 text-[15px] font-semibold text-[#181818]">
