@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cookie, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export function CookieConsent() {
   const [mounted, setMounted] = useState(false);
@@ -51,18 +51,13 @@ export function CookieConsent() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.96 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-5 sm:bottom-6 left-5 sm:left-6 z-50 max-w-[360px] sm:max-w-[390px] w-[calc(100vw-2.5rem)] bg-white border border-[#EAEAEA] rounded-[22px] p-5 shadow-[0_16px_40px_rgba(0,0,0,0.12)] text-[#181818]"
+          className="fixed bottom-5 sm:bottom-6 right-5 sm:right-6 z-50 max-w-[360px] sm:max-w-[390px] w-[calc(100vw-2.5rem)] bg-white border border-[#EAEAEA] rounded-[22px] p-5 shadow-[0_16px_40px_rgba(0,0,0,0.12)] text-[#181818]"
         >
-          {/* Top Row: Icon + Title + Close */}
+          {/* Top Row: Title + Close */}
           <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#FFF5EA] text-[#D97706] flex items-center justify-center shrink-0">
-                <Cookie className="w-4 h-4" />
-              </div>
-              <h3 className="font-semibold text-[14.5px] text-[#111111] tracking-tight">
-                Cookie Preferences
-              </h3>
-            </div>
+            <h3 className="font-semibold text-[14.5px] text-[#111111] tracking-tight">
+              Cookie Preferences
+            </h3>
 
             <button
               onClick={handleDecline}
