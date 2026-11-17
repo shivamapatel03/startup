@@ -30,26 +30,26 @@ export function ContactSection() {
     setSubmitting(true);
     setError(null);
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    const formspreeEndpoint =
-      process.env.NEXT_PUBLIC_FORMSPREE_URL || "https://formspree.io/f/xwvggqpj";
-
     try {
-      const res = await fetch(formspreeEndpoint, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: data,
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
         setSubmitted(true);
-        form.reset();
+        setFormData({
+          name: "",
+          email: "",
+          service: "App Design",
+          message: "",
+        });
       } else {
-        const result = await res.json();
+        const result = await res.json().catch(() => null);
         setError(
           result?.error ||
             "There was a problem sending your message. Please email directly."
