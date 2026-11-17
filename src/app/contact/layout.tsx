@@ -2,21 +2,33 @@ import type { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Start Your Project | Contact BE UNIC Digital & AI Agency",
+  title: "Contact Us | Start Your Project with BE UNIC",
   description:
-    "Initiate a conversation with BE UNIC. Inquire about custom Web Development, UI/UX Design, Enterprise AI Solutions, Mobile Applications, and digital architecture.",
+    "Get in touch with BE UNIC to discuss mobile app design, iOS & Android development, and custom web applications. Fast response time.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
-    title: "Start Your Project | Contact BE UNIC Agency",
+    title: "Contact Us | Start Your Project with BE UNIC",
     description:
-      "Inquire about custom Web Development, UI/UX Design, Enterprise AI Solutions, Mobile Applications, and digital growth.",
+      "Get in touch with BE UNIC to discuss mobile app design, iOS & Android development, and custom web applications.",
     url: "https://beunicstudio.com/contact",
     type: "website",
+    images: [
+      {
+        url: "/contact.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact BE UNIC Studio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Start Your Project | Contact BE UNIC Agency",
+    title: "Contact Us | Start Your Project with BE UNIC",
     description:
-      "Inquire about custom Web Development, UI/UX Design, Enterprise AI Solutions, Mobile Applications, and digital growth.",
+      "Get in touch with BE UNIC to discuss mobile app design, iOS & Android development, and custom web applications.",
+    images: ["/contact.png"],
   },
 };
 

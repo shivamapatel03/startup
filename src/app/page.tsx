@@ -10,33 +10,86 @@ import { Footer } from "@/components/layout/Footer";
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "BE UNIC",
-    alternateName: "BE UNIC App Design & Development Studio",
-    description:
-      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
-    url: "https://beunicstudio.com",
-    email: "beunicmark@gmail.com",
-    sameAs: [
-      "https://www.linkedin.com/company/beunic-agency",
-      "https://www.instagram.com/beunic.agency/",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://beunicstudio.com/#organization",
+        name: "BE UNIC",
+        alternateName: "BE UNIC Design & Development Studio",
+        url: "https://beunicstudio.com",
+        logo: "https://beunicstudio.com/icon.png",
+        email: "beunicmark@gmail.com",
+        sameAs: [
+          "https://www.linkedin.com/company/beunic-agency",
+          "https://www.instagram.com/beunic.agency/",
+          "https://dribbble.com/shivam-patel",
+        ],
+        founder: [
+          {
+            "@type": "Person",
+            name: "Shivam Patel",
+            jobTitle: "Engineering Head",
+            sameAs: "https://www.linkedin.com/in/shivam-patel",
+          },
+          {
+            "@type": "Person",
+            name: "Swayam Shah",
+            jobTitle: "Design Head",
+            sameAs: "https://www.linkedin.com/in/swayam-shah",
+          },
+          {
+            "@type": "Person",
+            name: "Om Patel",
+            jobTitle: "Creative Head",
+            sameAs: "https://www.linkedin.com/in/om-patel-29a25b357/",
+          },
+          {
+            "@type": "Person",
+            name: "Pramukh Prajapati",
+            jobTitle: "Systems Head",
+            sameAs: "https://www.linkedin.com/in/pramukhprajapati17/",
+          },
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://beunicstudio.com/#website",
+        url: "https://beunicstudio.com",
+        name: "BE UNIC",
+        description:
+          "BE UNIC is a premier app design & software engineering studio crafting high-impact digital products.",
+        publisher: {
+          "@id": "https://beunicstudio.com/#organization",
+        },
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://beunicstudio.com/#service",
+        name: "BE UNIC App Design & Development",
+        url: "https://beunicstudio.com",
+        parentOrganization: {
+          "@id": "https://beunicstudio.com/#organization",
+        },
+        description:
+          "We design and develop exceptional mobile applications, intuitive interfaces, and scalable websites that help ambitious businesses innovate, scale, and stand out.",
+        priceRange: "$$",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "IN",
+        },
+        knowsAbout: [
+          "UI/UX Design",
+          "Mobile App Development",
+          "iOS Development",
+          "Android Development",
+          "Web Engineering",
+          "Next.js Development",
+          "React Native",
+          "Digital Product Design",
+          "SaaS Engineering",
+        ],
+      },
     ],
-    knowsAbout: [
-      "UI/UX Design",
-      "Mobile App Development",
-      "iOS Development",
-      "Android Development",
-      "Web Engineering",
-      "Next.js Development",
-      "React",
-      "Digital Product Design",
-      "SaaS Engineering",
-    ],
-    priceRange: "$$",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "IN",
-    },
   };
 
   return (

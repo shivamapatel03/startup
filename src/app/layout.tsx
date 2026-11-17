@@ -1,24 +1,51 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com";
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com"),
-  title: "BE UNIC | Premium App Design & Development Studio",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "BE UNIC | Premium App Design & Development Studio",
+    template: "%s | BE UNIC",
+  },
   description:
-    "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
+    "BE UNIC is a premier digital design & software engineering studio. We build exceptional mobile applications (iOS & Android), intuitive UI/UX interfaces, and high-performance websites for ambitious brands and fast-growing startups.",
   keywords: [
     "BE UNIC",
     "App Design Studio",
-    "Web Development",
-    "UI/UX Design",
-    "Mobile Applications",
-    "SaaS Development",
-    "Custom Software",
-    "Digital Products",
+    "Mobile App Development",
+    "UI/UX Design Studio",
+    "iOS App Development",
+    "Android App Development",
+    "Web Development Studio",
+    "React Native Development",
+    "Next.js Development",
+    "Digital Product Studio",
+    "SaaS Product Design",
+    "Custom Software Development",
+    "Figma UI UX Design",
+    "India Design Studio",
+    "Product Design Agency",
   ],
-  authors: [{ name: "BE UNIC", url: "https://beunicstudio.com" }],
+  authors: [{ name: "BE UNIC", url: siteUrl }],
   creator: "BE UNIC",
   publisher: "BE UNIC",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
@@ -33,17 +60,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BE UNIC | Premium App Design & Development Studio",
     description:
-      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
-    url: "https://beunicstudio.com",
+      "We design and develop exceptional mobile applications, intuitive interfaces, and scalable websites that help ambitious businesses innovate, scale, and stand out.",
+    url: siteUrl,
     siteName: "BE UNIC",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/hero.png",
+        width: 1200,
+        height: 630,
+        alt: "BE UNIC - Premium App Design & Development Studio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "BE UNIC | Premium App Design & Development Studio",
     description:
-      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
+      "We design and develop exceptional mobile applications, intuitive interfaces, and scalable websites that help ambitious businesses innovate, scale, and stand out.",
+    images: ["/hero.png"],
   },
   icons: {
     icon: [
@@ -52,6 +88,7 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/new.png", type: "image/png" }],
   },
+  category: "technology",
 };
 
 export default function RootLayout({
