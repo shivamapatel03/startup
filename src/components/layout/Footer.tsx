@@ -47,8 +47,8 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 max-w-[1240px] mx-auto">
-        {/* Top Section — Navigation & Direct Contact Columns (Matching Reference Image) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 pb-16 sm:pb-24 md:pb-28">
+        {/* Top Section — Navigation & Direct Contact Columns (3 Columns Matching Reference Image) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 pb-16 sm:pb-24 md:pb-28">
           {/* Column 1: Explore */}
           <div className="space-y-3">
             <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
@@ -128,23 +128,12 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://dribbble.com"
+                  href="https://dribbble.com/shivam-patel"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
                 >
                   <span>Dribbble</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
-                >
-                  <span>X / Twitter</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </li>
@@ -170,17 +159,6 @@ export function Footer() {
                 Available worldwide for client collaborations
               </p>
             </div>
-          </div>
-
-          {/* Column 4: Studio Mission */}
-          <div className="space-y-3 col-span-2 md:col-span-1">
-            <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
-              Studio
-            </span>
-            <p className="text-[13.5px] text-[#666666] leading-[1.65]">
-              We design and engineer exceptional mobile applications, intuitive
-              interfaces, and scalable websites that move your business forward.
-            </p>
           </div>
         </div>
 
