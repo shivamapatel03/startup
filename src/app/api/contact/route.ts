@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const formspreeEndpoint =
       process.env.FORMSPREE_URL ||
       process.env.NEXT_PUBLIC_FORMSPREE_URL ||
-      "https://formspree.io/f/xwvggqpj";
+      "https://formspree.io/f/mblkbpgr";
 
     let forwardedSuccessfully = false;
 
@@ -40,6 +40,9 @@ export async function POST(request: Request) {
 
       if (formspreeRes.ok) {
         forwardedSuccessfully = true;
+      } else {
+        const errorText = await formspreeRes.text().catch(() => "");
+        console.error("Formspree forward returned status:", formspreeRes.status, errorText);
       }
     } catch (err) {
       console.error("Formspree forward error:", err);

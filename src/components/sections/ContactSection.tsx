@@ -49,14 +49,54 @@ export function ContactSection() {
           message: "",
         });
       } else {
-        const result = await res.json().catch(() => null);
-        setError(
-          result?.error ||
-            "There was a problem sending your message. Please email directly."
-        );
+        // Direct Formspree fallback if server route encounters issues
+        const directRes = await fetch("https://formspree.io/f/mblkbpgr", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (directRes.ok) {
+          setSubmitted(true);
+          setFormData({
+            name: "",
+            email: "",
+            service: "App Design",
+            message: "",
+          });
+        } else {
+          setError(
+            "There was a problem sending your message. Please email directly to beunicmark@gmail.com."
+          );
+        }
       }
     } catch {
-      // Fallback: If network is offline, confirm submission for smooth UX
+      try {
+        const directRes = await fetch("https://formspree.io/f/mblkbpgr", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (directRes.ok) {
+          setSubmitted(true);
+          setFormData({
+            name: "",
+            email: "",
+            service: "App Design",
+            message: "",
+          });
+          return;
+        }
+      } catch {
+        // Fallback: If network is offline, confirm submission for smooth UX
+      }
       setSubmitted(true);
     } finally {
       setSubmitting(false);
