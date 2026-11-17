@@ -1,78 +1,203 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-// Clean inline SVGs to avoid third-party icon library export mismatches
-function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
+export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
 
-function LinkedInIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
+  // Track scroll position of the footer to automatically grow the gradients
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["start end", "end end"],
+  });
 
-interface FooterProps {
-  transparent?: boolean;
-  noBorder?: boolean;
-  compact?: boolean;
-}
+  // Dynamic subtle grow animation for left (orange) and right (red) gradients on scroll
+  const scaleGradient = useTransform(scrollYProgress, [0, 1], [0.85, 1.15]);
+  const opacityGradient = useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.38, 0.5]);
+  const yShift = useTransform(scrollYProgress, [0, 1], [30, 0]);
 
-export function Footer({ transparent = false, noBorder = false, compact = false }: FooterProps) {
   return (
     <footer
-      className={`relative z-20 w-full text-slate-400 font-outfit transition-colors duration-300 ${
-        transparent ? "bg-transparent" : "bg-black"
-      } ${noBorder ? "border-none" : "border-t border-white/[0.08]"} ${
-        compact ? "py-4 px-6 md:px-12" : "py-8 px-6 sm:px-12"
-      }`}
+      ref={footerRef}
+      className="relative z-10 w-full overflow-hidden bg-white text-[#252525] pt-16 sm:pt-20 md:pt-24 pb-6 px-6 md:px-14 border-t border-[#EAEAEA]"
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        
-        {/* Left Side: Copyright Notice */}
-        <div className="text-center sm:text-left text-[13px] sm:text-[14px] font-normal tracking-wide text-slate-400">
-          © 2026 @ BE UNIC all rights reserved.
+      {/* Subtle Ambient Gradients: Soft warm orange on left, delicate soft red/coral on right */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        {/* Left Side: Soft Amber/Peach Glow */}
+        <motion.div
+          style={{
+            scale: scaleGradient,
+            opacity: opacityGradient,
+            y: yShift,
+          }}
+          className="absolute -bottom-24 -left-16 sm:-left-20 w-[280px] sm:w-[400px] md:w-[500px] h-[200px] sm:h-[260px] md:h-[300px] rounded-full bg-[radial-gradient(circle,rgba(255,145,60,0.20)_0%,rgba(255,180,100,0.06)_50%,transparent_75%)] blur-[60px] sm:blur-[80px] md:blur-[100px]"
+        />
+
+        {/* Right Side: Soft Rose/Coral Glow */}
+        <motion.div
+          style={{
+            scale: scaleGradient,
+            opacity: opacityGradient,
+            y: yShift,
+          }}
+          className="absolute -bottom-24 -right-16 sm:-right-20 w-[280px] sm:w-[400px] md:w-[500px] h-[200px] sm:h-[260px] md:h-[300px] rounded-full bg-[radial-gradient(circle,rgba(255,80,105,0.18)_0%,rgba(255,120,140,0.05)_50%,transparent_75%)] blur-[60px] sm:blur-[80px] md:blur-[100px]"
+        />
+      </div>
+
+      <div className="relative z-10 max-w-[1240px] mx-auto">
+        {/* Top Section — Navigation & Direct Contact Columns (Matching Reference Image) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 pb-16 sm:pb-24 md:pb-28">
+          {/* Column 1: Explore */}
+          <div className="space-y-3">
+            <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
+              Explore
+            </span>
+            <ul className="space-y-2 text-[14px] sm:text-[15px] font-medium text-[#252525]">
+              <li>
+                <a
+                  href="#hero"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#our-work"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  Our Work
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#about-us"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  className="hover:text-black transition-colors duration-200"
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Connect */}
+          <div className="space-y-3">
+            <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
+              Connect
+            </span>
+            <ul className="space-y-2 text-[14px] sm:text-[15px] font-medium text-[#252525]">
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/beunic-agency"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
+                >
+                  <span>LinkedIn</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/beunic.agency/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
+                >
+                  <span>Instagram</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://dribbble.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
+                >
+                  <span>Dribbble</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-black transition-colors duration-200 group"
+                >
+                  <span>X / Twitter</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Contact */}
+          <div className="space-y-3">
+            <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
+              Contact
+            </span>
+            <div className="space-y-2.5 text-[14px] sm:text-[15px] text-[#252525]">
+              <a
+                href="mailto:beunicmark@gmail.com"
+                className="font-medium hover:text-black transition-colors duration-200 inline-flex items-center gap-1 group"
+              >
+                <span>beunicmark@gmail.com</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#888888] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+              <p className="text-[13px] text-[#777777] leading-relaxed pt-1">
+                Global Digital Product Studio
+                <br />
+                Available worldwide for client collaborations
+              </p>
+            </div>
+          </div>
+
+          {/* Column 4: Studio Mission */}
+          <div className="space-y-3 col-span-2 md:col-span-1">
+            <span className="font-mono text-[11px] sm:text-xs text-[#777777] uppercase tracking-[1.5px]">
+              Studio
+            </span>
+            <p className="text-[13.5px] text-[#666666] leading-[1.65]">
+              We design and engineer exceptional mobile applications, intuitive
+              interfaces, and scalable websites that move your business forward.
+            </p>
+          </div>
         </div>
 
-        {/* Right Side Corner: Social Media Icons (Instagram, LinkedIn) */}
-        <div className="flex items-center gap-3.5">
-          <motion.a
-            href="https://www.instagram.com/beunic.agency/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="BE UNIC Instagram"
-            whileHover={{ scale: 1.1, y: -2 }}
-            transition={{ duration: 0.2 }}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white text-slate-300 hover:text-[#0B0F19] transition-all duration-300 flex items-center justify-center border border-white/15 shadow-sm"
-          >
-            <InstagramIcon className="w-4 h-4" />
-          </motion.a>
-
-          <motion.a
-            href="https://www.linkedin.com/company/beunic-agency/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="BE UNIC LinkedIn"
-            whileHover={{ scale: 1.1, y: -2 }}
-            transition={{ duration: 0.2 }}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.06] hover:bg-white text-slate-300 hover:text-[#0B0F19] transition-all duration-300 flex items-center justify-center border border-white/15 shadow-sm"
-          >
-            <LinkedInIcon className="w-4 h-4" />
-          </motion.a>
+        {/* Big Brand Typography — Clean, Monumental, Without Characters */}
+        <div className="w-full flex justify-center pt-8 sm:pt-12 pb-2 select-none">
+          <h2 className="relative z-10 text-[18vw] sm:text-[19vw] md:text-[20vw] font-black tracking-[-0.04em] text-[#181818] text-center leading-[0.78] select-none whitespace-nowrap">
+            BE UNIC
+          </h2>
         </div>
 
+        {/* Bottom Copyright & Credits */}
+        <div className="pt-6 mt-4 border-t border-black/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-[#777777] font-medium">
+          <div>© {new Date().getFullYear()} BE UNIC. All rights reserved.</div>
+          <div className="text-[#999999]">
+            Designed &amp; Engineered by BE UNIC
+          </div>
+        </div>
       </div>
     </footer>
   );

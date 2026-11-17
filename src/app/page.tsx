@@ -1,9 +1,10 @@
 import React from "react";
 import { Header } from "@/components/layout/Header";
-import { InteractiveCursor } from "@/components/hero/InteractiveCursor";
-import { BackgroundStage } from "@/components/hero/BackgroundStage";
-import { HeroContent } from "@/components/hero/HeroContent";
-import { ProjectShowcase } from "@/components/sections/ProjectShowcase";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { PortfolioSection } from "@/components/sections/PortfolioSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
@@ -11,47 +12,60 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "BE UNIC",
-    alternateName: "BE UNIC Digital & AI Agency",
+    alternateName: "BE UNIC App Design & Development Studio",
     description:
-      "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
     url: "https://beunicstudio.com",
-    logo: "https://beunicstudio.com/icon.png",
-    sameAs: ["https://www.linkedin.com/company/beunic-agency/"],
-    knowsAbout: [
-      "Web Development",
-      "UI/UX Design",
-      "AI Solutions",
-      "Mobile Applications",
-      "Brand Identity",
-      "SEO & Growth",
-      "Custom LLM Integrations",
+    email: "beunicmark@gmail.com",
+    sameAs: [
+      "https://www.linkedin.com/company/beunic-agency",
+      "https://www.instagram.com/beunic.agency/",
     ],
+    knowsAbout: [
+      "UI/UX Design",
+      "Mobile App Development",
+      "iOS Development",
+      "Android Development",
+      "Web Engineering",
+      "Next.js Development",
+      "React",
+      "Digital Product Design",
+      "SaaS Engineering",
+    ],
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IN",
+    },
   };
 
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-[#050816] selection:bg-[#2563EB] selection:text-white">
-      {/* Rich JSON-LD Organization Schema for Google Search & AI Knowledge Indexing */}
+    <main className="relative min-h-screen w-full bg-white text-[#111111] overflow-x-hidden">
+      {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Sleek Header Navigation */}
+      {/* Part 1 — Header / Navigation */}
       <Header />
 
-      {/* Smooth Mouse Following Spotlight & Parallax Engine */}
-      <InteractiveCursor />
+      {/* Part 2 — Hero Section */}
+      <HeroSection />
 
-      {/* Animated Abstract Digital Service Background Stage */}
-      <BackgroundStage />
+      {/* Part 3 — 3D Character Services Section ("How We Bring Your Ideas to Life") */}
+      <ServicesSection />
 
-      {/* Center Aligned Luxury Hero Content */}
-      <HeroContent />
+      {/* Part 4 — Our Latest Work ("Our Latest Work") */}
+      <PortfolioSection />
 
-      {/* Retro Computer Box Project Videos Showcase */}
-      <ProjectShowcase />
+      {/* Part 5 — About Us Section */}
+      <AboutSection />
 
-      {/* Minimalist Executive Footer */}
+      {/* Part 6 — Contact / Project Inquiry ("Let's Build Something Great Together") */}
+      <ContactSection />
+
+      {/* Part 7 — Footer */}
       <Footer />
     </main>
   );

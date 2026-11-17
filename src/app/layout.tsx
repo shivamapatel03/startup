@@ -1,46 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Great_Vibes } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const greatVibes = Great_Vibes({
-  weight: "400",
-  variable: "--font-cursive",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com"),
-  title: "BE UNIC | Modern Digital & AI Agency",
+  title: "BE UNIC | Premium App Design & Development Studio",
   description:
-    "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+    "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
   keywords: [
-    "Digital Agency",
-    "AI Solutions",
+    "BE UNIC",
+    "App Design Studio",
     "Web Development",
     "UI/UX Design",
     "Mobile Applications",
-    "Brand Identity",
-    "SEO & Growth",
-    "Custom AI Agents",
-    "Enterprise AI Integrations",
-    "BE UNIC",
+    "SaaS Development",
+    "Custom Software",
+    "Digital Products",
   ],
-  authors: [{ name: "BE UNIC Agency", url: "https://beunicstudio.com" }],
-  creator: "BE UNIC Agency",
-  publisher: "BE UNIC Agency",
+  authors: [{ name: "BE UNIC", url: "https://beunicstudio.com" }],
+  creator: "BE UNIC",
+  publisher: "BE UNIC",
   robots: {
     index: true,
     follow: true,
@@ -53,9 +31,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "BE UNIC | Modern Digital & AI Agency",
+    title: "BE UNIC | Premium App Design & Development Studio",
     description:
-      "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
     url: "https://beunicstudio.com",
     siteName: "BE UNIC",
     locale: "en_US",
@@ -63,9 +41,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BE UNIC | Modern Digital & AI Agency",
+    title: "BE UNIC | Premium App Design & Development Studio",
     description:
-      "We craft intuitive UI/UX, scalable web applications, custom AI agents, and modern digital architectures that accelerate brand growth.",
+      "We design and develop exceptional websites, mobile applications, and digital products that help ambitious businesses innovate, scale, and stand out.",
+  },
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/new.png", type: "image/png" },
+    ],
+    apple: [{ url: "/new.png", type: "image/png" }],
   },
 };
 
@@ -75,11 +60,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${outfit.variable} ${greatVibes.variable} h-full antialiased dark scroll-smooth`}
-    >
-      <body className="min-h-full flex flex-col bg-[#050816] text-slate-100 selection:bg-blue-600 selection:text-white">
+    <html lang="en" className="h-full antialiased dark scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#000000] text-[#FFFFFF] selection:bg-[#52A8FF]/30 selection:text-white font-sans">
         {children}
       </body>
     </html>
