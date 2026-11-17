@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com";
 
@@ -108,6 +109,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-[#000000] text-[#FFFFFF] selection:bg-[#52A8FF]/30 selection:text-white font-sans">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
