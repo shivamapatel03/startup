@@ -22,13 +22,13 @@ const coreMembers = [
     name: "Om Patel",
     role: "Creative head BE UNIC",
     image: "/team/team4.png",
-    linkedin: "https://www.linkedin.com/in/om-patel",
+    linkedin: "https://www.linkedin.com/in/om-patel-29a25b357/",
   },
   {
     name: "Pramukh Prajapati",
     role: "Systems head BE UNIC",
     image: "/team/team3.png",
-    linkedin: "https://www.linkedin.com/in/pramukh-prajapati",
+    linkedin: "https://www.linkedin.com/in/pramukhprajapati17/",
   },
 ];
 
@@ -49,10 +49,16 @@ export default function MembersPage() {
             {coreMembers.map((member) => (
               <div
                 key={member.name}
-                className="bg-white border border-[#EAEAEA] rounded-[28px] p-7 sm:p-8 flex flex-col items-center text-center w-full max-w-[275px] shadow-[0_2px_12px_rgba(0,0,0,0.02)]"
+                className="relative bg-white border border-[#EAEAEA] rounded-[28px] p-7 sm:p-8 flex flex-col items-center text-center w-full max-w-[275px] shadow-[0_2px_12px_rgba(0,0,0,0.02)] overflow-hidden"
               >
+                {/* Blue Gradient Effect at bottom inside card */}
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-0 inset-x-0 h-32 pointer-events-none bg-[radial-gradient(ellipse_100%_80%_at_50%_115%,rgba(56,189,248,0.28)_0%,rgba(59,130,246,0.14)_45%,transparent_75%)] select-none"
+                />
+
                 {/* Member Avatar */}
-                <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-[#F0F1F3] select-none shrink-0">
+                <div className="relative z-10 w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden bg-[#F0F1F3] select-none shrink-0">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -63,12 +69,12 @@ export default function MembersPage() {
                 </div>
 
                 {/* Member Name */}
-                <h2 className="font-bold text-[18px] sm:text-[19px] text-[#181818] mt-6">
+                <h2 className="relative z-10 font-bold text-[18px] sm:text-[19px] text-[#181818] mt-6">
                   {member.name}
                 </h2>
 
                 {/* Member Role */}
-                <p className="text-[13.5px] sm:text-[14px] text-[#666666] mt-1">
+                <p className="relative z-10 text-[13.5px] sm:text-[14px] text-[#666666] mt-1">
                   {member.role}
                 </p>
 
@@ -77,7 +83,7 @@ export default function MembersPage() {
                   href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center justify-center bg-[#222222] hover:bg-black text-white text-[13px] font-medium px-6 py-2.5 rounded-[6px] transition-colors"
+                  className="relative z-10 mt-6 inline-flex items-center justify-center bg-[#222222] hover:bg-black text-white text-[13px] font-medium px-6 py-2.5 rounded-[6px] transition-colors"
                 >
                   View profile
                 </a>
