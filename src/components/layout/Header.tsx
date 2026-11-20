@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
@@ -37,6 +38,7 @@ const servicesList = [
 const otherNavLinks = [
   { name: "Our Work", href: "/#our-work" },
   { name: "About Us", href: "/#about-us" },
+  { name: "Hire Us", href: "/members" },
   { name: "Contact", href: "/#contact" },
 ];
 
@@ -172,13 +174,13 @@ export function Header() {
 
           {/* Other Nav Links */}
           {otherNavLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className="text-[15px] font-medium text-[#252525] hover:text-black/60 transition-colors duration-200"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -300,14 +302,14 @@ export function Header() {
 
                   {/* Other Links */}
                   {otherNavLinks.map((link) => (
-                    <a
+                    <Link
                       key={link.name}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="text-[18px] font-semibold text-[#181818] hover:text-black transition-colors py-1"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
