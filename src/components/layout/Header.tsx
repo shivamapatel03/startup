@@ -42,6 +42,38 @@ const otherNavLinks = [
   { name: "Contact", href: "/#contact" },
 ];
 
+function RollingText({
+  text,
+  className = "",
+  active = false,
+}: {
+  text: string;
+  className?: string;
+  active?: boolean;
+}) {
+  return (
+    <span
+      className={`relative inline-flex flex-col overflow-hidden h-[21px] leading-[21px] select-none ${className}`}
+    >
+      <span
+        className={`inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          active ? "-translate-y-full" : "group-hover:-translate-y-full"
+        }`}
+      >
+        {text}
+      </span>
+      <span
+        aria-hidden="true"
+        className={`absolute top-full left-0 inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] font-semibold text-black ${
+          active ? "-translate-y-full" : "group-hover:-translate-y-full"
+        }`}
+      >
+        {text}
+      </span>
+    </span>
+  );
+}
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -92,7 +124,12 @@ export function Header() {
   return (
     <>
       {/* Absolute Header (Not Fixed: Scrolls with the page and disappears upon scroll) */}
-      <header className="absolute top-[24px] md:top-[36px] left-0 right-0 z-50 w-full px-6 md:px-14 flex items-center justify-between pointer-events-auto">
+      <motion.header
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="absolute top-[24px] md:top-[36px] left-0 right-0 z-50 w-full px-6 md:px-14 flex items-center justify-between pointer-events-auto"
+      >
         {/* Left Section — Brand Logo (Icon only in navbar) */}
         <div className="flex items-center">
           <BrandLogo showText={false} />
@@ -110,13 +147,21 @@ export function Header() {
             <button
               type="button"
               onClick={() => setServicesOpen(!servicesOpen)}
-              className="flex items-center gap-1.5 text-[15px] font-medium text-[#252525] hover:text-black transition-colors duration-200 cursor-pointer focus:outline-none"
+              className="group relative flex items-center gap-1.5 text-[15px] font-medium text-[#252525] hover:text-black transition-colors duration-200 cursor-pointer focus:outline-none py-1"
               aria-expanded={servicesOpen}
             >
-              <span>Services</span>
+              <RollingText text="Services" active={servicesOpen} />
               <ChevronDown
                 className={`w-3.5 h-3.5 text-[#666666] transition-transform duration-200 ${
-                  servicesOpen ? "rotate-180 text-black" : ""
+                  servicesOpen
+                    ? "rotate-180 text-black"
+                    : "group-hover:text-black group-hover:translate-y-0.5"
+                }`}
+              />
+              <span
+                aria-hidden="true"
+                className={`absolute -bottom-0.5 left-0 h-[1.5px] bg-[#181818] transition-all duration-300 ease-out rounded-full ${
+                  servicesOpen ? "w-full" : "w-0 group-hover:w-full"
                 }`}
               />
             </button>
@@ -177,9 +222,13 @@ export function Header() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-[15px] font-medium text-[#252525] hover:text-black/60 transition-colors duration-200"
+              className="group relative inline-flex items-center text-[15px] font-medium text-[#252525] hover:text-black transition-colors duration-200 py-1"
             >
-              {link.name}
+              <RollingText text={link.name} />
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-[#181818] transition-all duration-300 ease-out group-hover:w-full rounded-full"
+              />
             </Link>
           ))}
         </nav>
@@ -200,7 +249,7 @@ export function Header() {
         >
           <Menu className="w-6 h-6 text-[#252525]" />
         </button>
-      </header>
+      </motion.header>
 
       {/* Mobile Navigation Drawer: Slides in from the LEFT side with smooth close animation */}
       <AnimatePresence>
@@ -306,9 +355,20 @@ export function Header() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-[18px] font-semibold text-[#181818] hover:text-black transition-colors py-1"
+                      className="group flex items-center justify-between text-[18px] font-semibold text-[#181818] hover:text-black transition-colors py-1.5"
                     >
-                      {link.name}
+                      <span className="relative inline-flex flex-col overflow-hidden h-[26px] leading-[26px]">
+                        <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+                          {link.name}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute top-full left-0 inline-block transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full text-black"
+                        >
+                          {link.name}
+                        </span>
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-[#888888] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
                     </Link>
                   ))}
                 </div>
