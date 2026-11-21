@@ -10,6 +10,7 @@ const serviceCategories = [
   "App Design",
   "App Development",
   "Web Development",
+  "Content Creation",
   "Full Product",
 ];
 

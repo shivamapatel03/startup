@@ -33,6 +33,14 @@ const servicesList = [
     badgeBg: "bg-[#FFE8ED]",
     borderColor: "border-[#E11D48]/20",
   },
+  {
+    title: "Content Creation",
+    description: "Engaging visual stories, brand assets, and digital media.",
+    href: "/#services",
+    characterImg: "/character/content.png",
+    badgeBg: "bg-[#FFF4E5]",
+    borderColor: "border-[#D97706]/20",
+  },
 ];
 
 const otherNavLinks = [
@@ -174,10 +182,10 @@ export function Header() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 6, scale: 0.98 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="absolute top-full -left-16 sm:-left-20 lg:-left-24 pt-2.5 z-50 w-[520px] sm:w-[540px] max-w-[calc(100vw-2rem)] pointer-events-auto"
+                  className="absolute top-full -left-16 sm:-left-20 lg:-left-24 pt-2.5 z-50 w-[540px] sm:w-[580px] max-w-[calc(100vw-2rem)] pointer-events-auto"
                 >
                   <div className="bg-white rounded-xl border border-[#EAEAEA] shadow-[0_12px_32px_rgba(0,0,0,0.08)] p-3 sm:p-3.5">
-                    <div className="grid grid-cols-3 gap-2.5">
+                    <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                       {servicesList.map((service) => (
                         <a
                           key={service.title}

@@ -50,6 +50,17 @@ const serviceCards: ServiceCardData[] = [
     gradientClass: "from-[#FFE8ED] to-[#FFC9D6]",
     glowColor: "rgba(255, 100, 140, 0.25)",
   },
+  {
+    title: "Content Creation",
+    description:
+      "We craft high-impact visual stories, digital assets, and compelling content that elevates your brand presence.",
+    ctaText: "Explore Content",
+    href: "#contact",
+    characterImg: "/character/content.png",
+    characterAlt: "BE UNIC Content Creation Specialist",
+    gradientClass: "from-[#FFF4E5] to-[#FFE3BA]",
+    glowColor: "rgba(245, 158, 11, 0.25)",
+  },
 ];
 
 export function ServicesSection() {
@@ -58,7 +69,7 @@ export function ServicesSection() {
       id="services"
       className="relative z-20 -mt-10 sm:-mt-12 w-full bg-white rounded-t-[42px] py-14 sm:py-16 md:py-20 px-6 md:px-14 shadow-[0_-6px_24px_rgba(0,0,0,0.02)]"
     >
-      <div className="max-w-[1080px] mx-auto">
+      <div className="max-w-[1240px] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <motion.h2
@@ -84,7 +95,7 @@ export function ServicesSection() {
         </div>
 
         {/* Compact & Simple Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {serviceCards.map((card, idx) => (
             <motion.div
               key={card.title}
