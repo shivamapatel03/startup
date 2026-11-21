@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
@@ -72,12 +73,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
+                <Link
                   href="/our-work"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Our Work
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -88,12 +89,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
+                <Link
                   href="/members"
                   className="hover:text-black transition-colors duration-200"
                 >
                   Members
-                </a>
+                </Link>
               </li>
               <li>
                 <a

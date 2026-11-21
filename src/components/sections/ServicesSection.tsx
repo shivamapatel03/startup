@@ -14,6 +14,7 @@ interface ServiceCardData {
   characterAlt: string;
   gradientClass: string;
   glowColor: string;
+  containerClass?: string;
 }
 
 const serviceCards: ServiceCardData[] = [
@@ -60,6 +61,7 @@ const serviceCards: ServiceCardData[] = [
     characterAlt: "BE UNIC Content Creation Specialist",
     gradientClass: "from-[#FFF4E5] to-[#FFE3BA]",
     glowColor: "rgba(245, 158, 11, 0.25)",
+    containerClass: "scale-[1.38] sm:scale-[1.46] origin-bottom translate-y-2",
   },
 ];
 
@@ -140,7 +142,11 @@ export function ServicesSection() {
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-32 bg-white/60 rounded-full blur-xl pointer-events-none" />
 
                 {/* 3D Character Illustration (Interactive hover animation inside card) */}
-                <div className="relative z-10 w-full h-[180px] sm:h-[195px] flex items-end justify-center px-4">
+                <div
+                  className={`relative z-10 w-full h-[180px] sm:h-[195px] flex items-end justify-center px-4 ${
+                    card.containerClass || ""
+                  }`}
+                >
                   <Image
                     src={card.characterImg}
                     alt={card.characterAlt}
