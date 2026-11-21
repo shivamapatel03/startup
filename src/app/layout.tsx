@@ -3,6 +3,7 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { CookieConsent } from "@/components/ui/CookieConsent";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
+import { PageIntroLoader } from "@/components/common/PageIntroLoader";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://beunicstudio.com";
 
@@ -110,6 +111,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#000000] text-[#FFFFFF] selection:bg-[#52A8FF]/30 selection:text-white font-sans">
+        <PageIntroLoader />
         <SmoothScroll />
         {children}
         <CookieConsent />
